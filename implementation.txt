@@ -1,0 +1,323 @@
+================================================================================
+  FULL-STACK DEVELOPER PORTFOLIO — IMPLEMENTATION PLAN
+================================================================================
+
+PROJECT OVERVIEW
+----------------
+A modern, responsive, full-stack developer portfolio web application.
+- Frontend : React 18 + Vite + Tailwind CSS + Lucide React icons
+- Backend  : FastAPI (Python) REST API
+- Theme    : Dark mode, blue/purple/cyan brand palette
+- Sections : Navbar, Hero, About, Skills, Projects, Experience, Contact, Footer
+
+================================================================================
+SECTION 1 — BACKEND
+================================================================================
+
+FILE: backend/requirements.txt
+-------------------------------
+fastapi==0.110.0
+uvicorn[standard]==0.29.0
+pydantic[email]==2.6.4
+
+NOTE: pydantic[email] is REQUIRED because schemas.py uses EmailStr.
+
+--------------------------------------------------------------------------------
+
+FILE: backend/main.py
+---------------------
+- Create FastAPI app with title, description, version
+- Add CORSMiddleware (allow all origins for dev; restrict in production)
+- Include routers: projects, skills, experience, contact
+- GET / → return app status info
+- GET /api/health → return {"status": "healthy"}
+
+--------------------------------------------------------------------------------
+
+FILE: backend/models/schemas.py
+--------------------------------
+Pydantic models:
+
+  Project:
+    - id: str
+    - title: str
+    - description: str
+    - category: str  (Full Stack | Frontend | Backend | AI/ML | DevOps)
+    - tags: List[str]
+    - image: str  (URL)
+    - live_url: Optional[str]
+    - github_url: Optional[str]
+    - featured: bool = False
+
+  SkillDetail:
+    - name: str
+    - level: int  (1-100)
+    - category: str
+    - icon: Optional[str]
+
+  Experience:
+    - id: str
+    - role: str
+    - company: str
+    - location: str
+    - period: str
+    - description: str
+    - achievements: List[str]
+    - technologies: List[str]
+
+  ContactRequest:
+    - name: str  (min 2, max 100)
+    - email: EmailStr
+    - subject: str  (min 2, max 150)
+    - message: str  (min 10, max 2000)
+
+  ContactResponse:
+    - success: bool
+    - message: str
+    - timestamp: str
+
+--------------------------------------------------------------------------------
+
+FILE: backend/routes/projects.py
+----------------------------------
+Router prefix: /api/projects
+
+Data — 5 projects:
+  1. AI Cloud Analytics Dashboard     (Full Stack)  — featured
+  2. Distributed Task Queue Engine    (Backend)     — featured
+  3. Developer Portfolio & CMS        (Frontend)    — featured
+  4. Neural Code Summarizer           (AI/ML)
+  5. DevOps Kubernetes Pipeline       (DevOps)
+
+Endpoints:
+  GET /api/projects               → return all (filter by ?category=)
+  GET /api/projects/{project_id}  → return single or 404
+
+--------------------------------------------------------------------------------
+
+FILE: backend/routes/skills.py
+--------------------------------
+Router prefix: /api/skills
+
+Data — 14 skills across 4 categories:
+  Frontend     : React/Next.js(92), JS/TS(90), Tailwind/HTML5(95), Redux/Zustand(85)
+  Backend      : Python FastAPI(94), Node.js(84), REST/GraphQL(92), Microservices(86)
+  Database     : PostgreSQL/MySQL(88), MongoDB/Redis(85)
+  DevOps/Tools : Docker(88), Git CI/CD(92), Linux/Bash(86), AWS(82)
+
+Endpoints:
+  GET /api/skills             → return flat list of all SkillDetail
+  GET /api/skills/categorized → return dict grouped by category
+
+--------------------------------------------------------------------------------
+
+FILE: backend/routes/experience.py
+------------------------------------
+Router prefix: /api/experience
+
+Data — 3 experiences:
+  1. Senior Full-Stack Engineer @ TechScale Solutions  (2023–Present, Remote)
+     Achievements: latency -42%, CI/CD standards, +30% user retention
+     Tech: Python, FastAPI, React, TypeScript, PostgreSQL, Docker
+
+  2. Software Engineer @ DataPulse Labs  (2021–2023, San Francisco CA)
+     Achievements: 50k events/sec worker, React design system, AWS cost -20%
+     Tech: Python, Redis, React, Tailwind CSS, AWS
+
+  3. Junior Frontend Developer @ WebCraft Studio  (2019–2021, Austin TX)
+     Achievements: 15+ web apps 99.8% uptime, page load < 1.2s
+     Tech: JavaScript, React, HTML5/CSS3, REST APIs, Git
+
+Endpoints:
+  GET /api/experience → return full list
+
+--------------------------------------------------------------------------------
+
+FILE: backend/routes/contact.py
+---------------------------------
+Router prefix: /api/contact
+
+Endpoints:
+  POST /api/contact   → accept ContactRequest, store in memory, return ContactResponse
+  GET  /api/contact/count → return total message count
+
+================================================================================
+SECTION 2 — FRONTEND
+================================================================================
+
+FILE: frontend/src/index.css
+------------------------------
+- @tailwind base / components / utilities
+- Custom scrollbar styling (dark theme)
+- html font: Inter, system-ui
+- code/pre font: Fira Code, monospace
+- Smooth scroll behavior on html element
+
+--------------------------------------------------------------------------------
+
+FILE: frontend/src/main.jsx
+----------------------------
+- ReactDOM.createRoot → render <App /> with StrictMode
+- Import index.css
+
+--------------------------------------------------------------------------------
+
+FILE: frontend/src/App.jsx
+---------------------------
+- Import all components: Navbar, Hero, About, Skills, Projects, Experience, Contact, Footer
+- Layout: dark-900 background, full height flex column
+- Order: Navbar → Hero → About → Skills → Projects → Experience → Contact → Footer
+
+--------------------------------------------------------------------------------
+
+FILE: frontend/src/services/api.js
+------------------------------------
+Base URL: /api  (proxied via Vite to http://127.0.0.1:8000)
+
+Functions:
+  fetchProjects(category)  → GET /api/projects or /api/projects?category=X
+                             fallback: return 3 static projects on error
+  fetchSkills()            → GET /api/skills/categorized
+                             fallback: return static categorized skills object
+  fetchExperience()        → GET /api/experience
+                             fallback: return 2 static experience objects
+  sendContactMessage(data) → POST /api/contact with JSON body
+                             throws Error on non-ok response
+
+--------------------------------------------------------------------------------
+
+FILE: frontend/src/components/Navbar.jsx
+-----------------------------------------
+Features:
+  - Fixed top navbar
+  - Logo: Terminal icon + "Dev Portfolio" text (blue accent)
+  - Links: About, Skills, Projects, Experience, Contact
+  - Scroll effect: transparent → frosted glass bg + border on scroll
+  - "Get in Touch" CTA button (desktop)
+  - Hamburger menu (mobile) with animated open/close
+  - Active link highlight on scroll (IntersectionObserver)
+
+--------------------------------------------------------------------------------
+
+FILE: frontend/src/components/Hero.jsx
+----------------------------------------
+Features:
+  - Gradient glow background blobs (blue + purple)
+  - Badge: "Full-Stack Software Engineer & Architect"
+  - H1: "Building scalable web software & backend systems."
+         (gradient text on key words)
+  - Subtext: intro paragraph
+  - CTA buttons: "Explore Projects" (primary) + "Contact Me" (secondary)
+  - Social links: GitHub, LinkedIn, Email icons
+  - Status badge: green pulse dot + "Available for new projects & roles"
+
+--------------------------------------------------------------------------------
+
+FILE: frontend/src/components/About.jsx
+-----------------------------------------
+Features:
+  - Section title: "About Me"
+  - Intro paragraph
+  - 4 highlight cards (hover lift effect):
+      1. Backend Architecture  (Server icon)
+      2. Frontend Engineering  (Layout icon)
+      3. Performance First     (Zap icon)
+      4. Clean Code & Security (ShieldCheck icon)
+
+--------------------------------------------------------------------------------
+
+FILE: frontend/src/components/Skills.jsx
+------------------------------------------
+Features:
+  - Section title: "Technical Stack"
+  - Fetch from /api/skills/categorized via fetchSkills()
+  - Loading spinner while fetching
+  - 2-column grid of category cards
+  - Each card: category icon + name, then skill bars
+  - Skill bar: name on left, % on right, gradient progress bar
+  - Category icons: Code2(Frontend), Server(Backend), Database(DB), Wrench(DevOps)
+
+--------------------------------------------------------------------------------
+
+FILE: frontend/src/components/Projects.jsx
+--------------------------------------------
+Features:
+  - Section title: "Featured Projects"
+  - Fetch from /api/projects via fetchProjects(category)
+  - Filter tabs: All, Full Stack, Frontend, Backend, AI/ML, DevOps
+  - Loading: skeleton cards (3 placeholders with pulse animation)
+  - Project card:
+      - Image with hover scale
+      - Featured badge (amber) + category badge
+      - Title, description (line-clamp-3)
+      - Tech tag pills
+      - Footer: GitHub link + Live Demo link
+
+--------------------------------------------------------------------------------
+
+FILE: frontend/src/components/Experience.jsx
+----------------------------------------------
+Features:
+  - Section title: "Work Experience"
+  - Fetch from /api/experience via fetchExperience()
+  - Loading spinner
+  - Vertical timeline layout (center line on md+, left line on mobile)
+  - Alternating left/right cards on desktop
+  - Card: period badge, location, role title, company name,
+           description, achievements list (CheckCircle icons),
+           tech stack badges
+
+--------------------------------------------------------------------------------
+
+FILE: frontend/src/components/Contact.jsx
+-------------------------------------------
+Features:
+  - Section title: "Get In Touch"
+  - Left panel (1/3): 3 info cards
+      - Email card (Mail icon, blue)
+      - Location card (MapPin icon, purple)
+      - Availability card (Phone icon, cyan)
+  - Right panel (2/3): contact form
+      - Fields: Name, Email (grid row), Subject, Message (textarea)
+      - Submit button with Send icon + loading state "Sending..."
+      - Success alert (green, CheckCircle icon)
+      - Error alert (red, AlertCircle icon)
+  - Form connects to sendContactMessage() from api.js
+  - Clears form on success
+
+--------------------------------------------------------------------------------
+
+FILE: frontend/src/components/Footer.jsx
+------------------------------------------
+Features:
+  - Dark background, top border
+  - Left: Terminal icon + "DevPortfolio" brand text
+  - Center: "Crafted with ❤ using React, Vite & FastAPI"
+  - Right: © year + "All rights reserved"
+  - Responsive: column on mobile, row on desktop
+
+================================================================================
+SECTION 3 — CONFIG FILES (already correct, no changes needed)
+================================================================================
+
+frontend/vite.config.js    — proxy /api → http://127.0.0.1:8000 ✓
+frontend/tailwind.config.js — dark/brand colors defined ✓
+frontend/package.json       — all dependencies present ✓
+frontend/index.html         — root div present ✓
+
+================================================================================
+SECTION 4 — IMPLEMENTATION ORDER
+================================================================================
+
+Step 1 : Write this plan            ← DONE
+Step 2 : Fix requirements.txt       ← next
+Step 3 : Rebuild all backend files
+Step 4 : Rebuild index.css, App.jsx, main.jsx
+Step 5 : Rebuild Navbar, Hero, About
+Step 6 : Rebuild Skills, Projects, Experience
+Step 7 : Rebuild Contact, Footer
+Step 8 : Rebuild api.js
+
+================================================================================
+END OF PLAN
+================================================================================
