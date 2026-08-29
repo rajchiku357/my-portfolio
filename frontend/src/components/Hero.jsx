@@ -60,7 +60,7 @@ export default function Hero() {
               </a>
 
               <a
-                href="https://www.linkedin.com"
+                href="https://www.linkedin.com/in/rithik-raj-4b1173254/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="px-3.5 py-2 rounded border border-white/10 hover:border-[#00f5ff] hover:text-[#00f5ff] bg-white/5 transition-all flex items-center gap-2"

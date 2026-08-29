@@ -149,7 +149,7 @@ export default function Contact() {
                   <Code className="w-5 h-5" />
                 </a>
                 <a
-                  href="https://www.linkedin.com"
+                  href="https://www.linkedin.com/in/rithik-raj-4b1173254/"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="p-3.5 rounded-full border border-white/10 text-[#b9caca] hover:text-[#00f5ff] hover:border-[#00f5ff]/40 bg-white/5 transition-colors flex items-center justify-center"
