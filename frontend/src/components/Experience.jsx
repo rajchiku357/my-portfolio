@@ -1,5 +1,5 @@
 import React from 'react';
-import { GraduationCap, Award, Download, Eye } from 'lucide-react';
+import { GraduationCap, Award, MessageCircle, ExternalLink } from 'lucide-react';
 
 export default function Experience() {
   const educationList = [
@@ -25,6 +25,8 @@ export default function Experience() {
       icon: Award
     }
   ];
+
+  const whatsappUrl = "https://wa.me/916299145304?text=" + encodeURIComponent("Hi Rithik, I saw your portfolio and would like to connect!");
 
   return (
     <section id="experience" className="py-24 bg-[#131314] text-[#e5e2e3] border-t border-white/10 font-sans relative z-10">
@@ -77,7 +79,7 @@ export default function Experience() {
           </div>
         </div>
 
-        {/* RESUME CTA BANNER */}
+        {/* RESUME & DIRECT WHATSAPP CTA BANNER */}
         <div className="pt-12 border-t border-white/10 flex flex-col items-center text-center">
           <h2 className="text-3xl md:text-5xl font-bold tracking-tight text-[#e5e2e3] mb-8">
             LET'S BUILD SOMETHING USEFUL.
@@ -85,11 +87,14 @@ export default function Experience() {
 
           <div className="flex flex-col sm:flex-row gap-4">
             <a
-              href="#contact"
-              className="bg-[#00f5ff] text-black font-mono text-xs font-bold tracking-widest px-8 py-4 rounded hover:scale-105 transition-transform duration-300 flex items-center justify-center gap-2"
+              href={whatsappUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="bg-[#00f5ff] text-black font-mono text-xs font-bold tracking-widest px-8 py-4 rounded hover:scale-105 transition-transform duration-300 flex items-center justify-center gap-2 shadow-[0_0_25px_rgba(0,245,255,0.3)]"
             >
-              <Download className="w-4 h-4" />
-              <span>CONTACT RITHIK RAJ</span>
+              <MessageCircle className="w-4 h-4 fill-black text-[#00f5ff]" />
+              <span>CONNECT ON WHATSAPP</span>
+              <ExternalLink className="w-3.5 h-3.5 ml-1" />
             </a>
           </div>
         </div>

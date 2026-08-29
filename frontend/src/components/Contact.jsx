@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { sendContactMessage } from '../services/api';
-import { Mail, MapPin, Phone, Code, Briefcase, Terminal, Send, CheckCircle2, AlertCircle, Copy, Check, ExternalLink } from 'lucide-react';
+import { Mail, MapPin, Phone, Code, Briefcase, Terminal, Send, CheckCircle2, AlertCircle, MessageCircle, ExternalLink } from 'lucide-react';
 
 export default function Contact() {
   const [formData, setFormData] = useState({
@@ -13,6 +13,8 @@ export default function Contact() {
   const [status, setStatus] = useState({ type: null, message: '' });
   const [submitting, setSubmitting] = useState(false);
   const [copiedEmail, setCopiedEmail] = useState(false);
+
+  const whatsappUrl = "https://wa.me/916299145304?text=" + encodeURIComponent("Hi Rithik, I saw your portfolio and would like to connect!");
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -47,24 +49,22 @@ export default function Contact() {
       // 2. FastAPI Backend Sync
       await sendContactMessage(formData);
 
-      // 3. Mailto trigger
-      const mailtoUrl = `mailto:oberoirithik9@gmail.com?subject=${encodeURIComponent(formData.subject || "Project Opportunity")}&body=${encodeURIComponent(`Name: ${formData.name}\nEmail: ${formData.email}\n\nMessage:\n${formData.message}`)}`;
-      window.open(mailtoUrl, '_blank');
+      // 3. WhatsApp Direct Click-to-Chat trigger
+      window.open(whatsappUrl, '_blank');
 
       setStatus({
         type: 'success',
-        message: `Message sent! Opening your email app to deliver directly to oberoirithik9@gmail.com.`
+        message: `Opening WhatsApp to chat directly with Rithik Raj (+91 6299145304).`
       });
 
       setFormData({ name: '', email: '', subject: '', message: '' });
     } catch (err) {
       console.error('Contact error:', err);
-      const mailtoUrl = `mailto:oberoirithik9@gmail.com?subject=${encodeURIComponent(formData.subject || "Contact Inquiry")}&body=${encodeURIComponent(`Name: ${formData.name}\nEmail: ${formData.email}\n\nMessage:\n${formData.message}`)}`;
-      window.open(mailtoUrl, '_blank');
+      window.open(whatsappUrl, '_blank');
 
       setStatus({
         type: 'success',
-        message: `Opening email client to send directly to oberoirithik9@gmail.com.`
+        message: `Opening WhatsApp to chat directly with Rithik Raj.`
       });
     } finally {
       setSubmitting(false);
@@ -123,15 +123,17 @@ export default function Contact() {
               </div>
             </div>
 
-            {/* Direct Gmail Send Button */}
+            {/* Direct WhatsApp Action Button */}
             <div className="pt-2">
               <a
-                href="mailto:oberoirithik9@gmail.com?subject=Project%20Inquiry%20from%20Portfolio"
-                className="inline-flex items-center gap-2 font-mono text-xs text-black font-bold bg-[#00f5ff] hover:scale-105 transition-transform px-5 py-2.5 rounded shadow-[0_0_20px_rgba(0,245,255,0.3)]"
+                href={whatsappUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2.5 font-mono text-xs text-black font-bold bg-[#00f5ff] hover:scale-105 transition-transform px-5 py-3 rounded shadow-[0_0_20px_rgba(0,245,255,0.3)]"
               >
-                <Mail className="w-4 h-4" />
-                <span>SEND DIRECT GMAIL MESSAGE</span>
-                <ExternalLink className="w-3.5 h-3.5 ml-1" />
+                <MessageCircle className="w-4 h-4" />
+                <span>CHAT DIRECTLY ON WHATSAPP</span>
+                <ExternalLink className="w-3.5 h-3.5 ml-0.5" />
               </a>
             </div>
 
@@ -177,7 +179,7 @@ export default function Contact() {
               <div className="flex justify-between items-start mb-8">
                 <h3 className="text-2xl font-semibold text-[#e5e2e3]">Initiate Contact</h3>
                 <span className="font-mono text-xs text-[#849495] tracking-widest">
-                  TO: OBEROIRITHIK9@GMAIL.COM
+                  WHATSAPP & GMAIL
                 </span>
               </div>
 
@@ -265,7 +267,7 @@ export default function Contact() {
                       <span>TRANSMITTING...</span>
                     ) : (
                       <>
-                        <span>TRANSMIT TO GMAIL</span>
+                        <span>TRANSMIT VIA WHATSAPP</span>
                         <Send className="w-4 h-4" />
                       </>
                     )}
