@@ -1,0 +1,27 @@
+# Root .gitignore for Full-Stack Developer Portfolio
+
+# Node / Frontend
+frontend/node_modules/
+frontend/dist/
+frontend/dist-ssr/
+frontend/*.local
+frontend/.env
+
+# Python / Backend
+backend/__pycache__/
+backend/*/__pycache__/
+backend/*.pyc
+backend/*.pyo
+backend/*.pyd
+backend/.pytest_cache/
+backend/venv/
+backend/.venv/
+backend/env/
+
+# IDE / OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+*.log
+
