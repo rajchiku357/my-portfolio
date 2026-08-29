@@ -8,7 +8,7 @@
     "build": "vite build",
     "preview": "vite preview",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d dist"
+    "deploy": "gh-pages -d dist -r https://github.com/rajchiku357/my-portfolio.git"
   },
   "dependencies": {
     "lucide-react": "^0.344.0",

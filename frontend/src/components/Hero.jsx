@@ -50,7 +50,7 @@ export default function Hero() {
             {/* Social & Coding Platform Links */}
             <div className="flex flex-wrap gap-2.5 sm:gap-3 pt-3 font-mono text-xs text-[#b9caca]">
               <a
-                href="https://github.com/oberoirithik9"
+                href="https://github.com/rajchiku357"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="px-3.5 py-2 rounded border border-white/10 hover:border-[#00f5ff] hover:text-[#00f5ff] bg-white/5 transition-all flex items-center gap-2"
@@ -60,7 +60,7 @@ export default function Hero() {
               </a>
 
               <a
-                href="https://linkedin.com"
+                href="https://www.linkedin.com"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="px-3.5 py-2 rounded border border-white/10 hover:border-[#00f5ff] hover:text-[#00f5ff] bg-white/5 transition-all flex items-center gap-2"

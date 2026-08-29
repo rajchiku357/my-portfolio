@@ -140,7 +140,7 @@ export default function Contact() {
               <h3 className="font-mono text-xs text-[#849495] tracking-widest mb-4">PROFILES & PLATFORMS</h3>
               <div className="flex flex-wrap gap-3">
                 <a
-                  href="https://github.com/oberoirithik9"
+                  href="https://github.com/rajchiku357"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="p-3.5 rounded-full border border-white/10 text-[#b9caca] hover:text-[#00f5ff] hover:border-[#00f5ff]/40 bg-white/5 transition-colors flex items-center justify-center"
@@ -149,7 +149,7 @@ export default function Contact() {
                   <Code className="w-5 h-5" />
                 </a>
                 <a
-                  href="https://linkedin.com"
+                  href="https://www.linkedin.com"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="p-3.5 rounded-full border border-white/10 text-[#b9caca] hover:text-[#00f5ff] hover:border-[#00f5ff]/40 bg-white/5 transition-colors flex items-center justify-center"

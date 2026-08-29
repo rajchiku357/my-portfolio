@@ -16,7 +16,7 @@ export default function Footer() {
 
         <div className="flex flex-col gap-3 font-mono text-xs tracking-widest text-[#b9caca]">
           <a
-            href="https://github.com/oberoirithik9"
+            href="https://github.com/rajchiku357"
             target="_blank"
             rel="noopener noreferrer"
             className="hover:text-[#00f5ff] transition-colors hover:translate-x-1 duration-300"
@@ -24,7 +24,7 @@ export default function Footer() {
             GitHub
           </a>
           <a
-            href="https://linkedin.com"
+            href="https://www.linkedin.com"
             target="_blank"
             rel="noopener noreferrer"
             className="hover:text-[#00f5ff] transition-colors hover:translate-x-1 duration-300"
