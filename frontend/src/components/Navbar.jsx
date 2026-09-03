@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Menu, X } from 'lucide-react';
+import { Menu, X, Download } from 'lucide-react';
 
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -48,13 +48,17 @@ export default function Navbar() {
           ))}
         </div>
 
-        {/* Resume Button */}
+        {/* Direct Resume Download Button */}
         <div className="hidden md:flex items-center">
           <a
-            href="#contact"
-            className="bg-[#00f5ff] text-black font-mono text-xs font-semibold tracking-wider px-4 py-2 rounded-sm hover:scale-[1.02] active:scale-95 transition-transform"
+            href="/Rithik_Raj_Resume.pdf"
+            download="Rithik_Raj_Resume.pdf"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="bg-[#00f5ff] text-black font-mono text-xs font-bold tracking-wider px-4 py-2 rounded hover:scale-105 active:scale-95 transition-transform flex items-center gap-1.5 shadow-[0_0_15px_rgba(0,245,255,0.3)]"
           >
-            Resume
+            <Download className="w-3.5 h-3.5 stroke-[2.5]" />
+            <span>RESUME</span>
           </a>
         </div>
 
@@ -82,11 +86,15 @@ export default function Navbar() {
             </a>
           ))}
           <a
-            href="#contact"
+            href="/Rithik_Raj_Resume.pdf"
+            download="Rithik_Raj_Resume.pdf"
+            target="_blank"
+            rel="noopener noreferrer"
             onClick={() => setMobileMenuOpen(false)}
-            className="block text-center bg-[#00f5ff] text-black font-semibold py-2.5 rounded-sm mt-2"
+            className="flex items-center justify-center gap-2 bg-[#00f5ff] text-black font-bold py-2.5 rounded mt-2"
           >
-            Resume
+            <Download className="w-4 h-4" />
+            <span>DOWNLOAD RESUME</span>
           </a>
         </div>
       )}

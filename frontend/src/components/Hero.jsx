@@ -39,6 +39,17 @@ export default function Hero() {
               </a>
 
               <a
+                href="/Rithik_Raj_Resume.pdf"
+                download="Rithik_Raj_Resume.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="border border-[#00f5ff]/50 bg-[#00f5ff]/10 text-[#00f5ff] hover:bg-[#00f5ff] hover:text-black font-mono text-xs font-bold tracking-widest px-6 sm:px-8 py-3.5 sm:py-4 rounded transition-all duration-300 flex items-center justify-center gap-2"
+              >
+                <Download className="w-4 h-4" />
+                <span>DOWNLOAD RESUME</span>
+              </a>
+
+              <a
                 href="#contact"
                 className="border border-white/20 text-[#e5e2e3] font-mono text-xs font-bold tracking-widest px-6 sm:px-8 py-3.5 sm:py-4 rounded hover:border-white hover:bg-white/5 transition-all duration-300 flex items-center justify-center gap-2"
               >
