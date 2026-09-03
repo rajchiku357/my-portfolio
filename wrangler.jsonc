@@ -1,0 +1,9 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "my-portfolio",
+  "compatibility_date": "2026-08-31",
+  "assets": {
+    "directory": "frontend/dist",
+    "html_handling": "single-page-application"
+  }
+}
